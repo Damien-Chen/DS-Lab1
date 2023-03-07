@@ -3,27 +3,22 @@ version: '3'
 
 services:
   client:
-    build:
+    build: 
       context: ./client
       dockerfile: Dockerfile
-    # volumes:
-    #   - ./client:/client
-    command: python ./client.py
+    #command: python ./client.py
+    # network_mode: host
     depends_on:
       - server
-   # networks:
-    #  - my-network
-    
+  
   server:
-    build:
+    build: 
       context: ./server
       dockerfile: Dockerfile
     volumes:
-      - ./data:/lab1/data
-    command: python ./server.py
+    - ./data:/data
+    #command: python ./server.py
+    # network_mode: host
+    # command: ["python", "server.py", "flask", "run", "--host=0.0.0.0"]
     ports:
-      - "5000:5000"
-  #  networks:
- #     - my-network
-#networks:
- # my-network:
+      - 5000:5000
